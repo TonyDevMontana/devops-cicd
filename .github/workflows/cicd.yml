@@ -36,8 +36,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            sudo docker pull shubhsaini/devopsclass-app:latest
-            sudo docker stop devopsclass-app || true
             sudo docker rm -f devopsclass-app || true
             sudo docker image prune -f
+            sudo docker pull shubhsaini/devopsclass-app:latest
             sudo docker run -d --name devopsclass-app -p 3000:3000 shubhsaini/devopsclass-app:latest
