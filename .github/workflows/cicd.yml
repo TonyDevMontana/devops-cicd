@@ -28,3 +28,15 @@ jobs:
 
       - name: Verufy Pushed image
         run: docker pull shubhsaini/devopsclass-app:latest
+
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            sudo docker pull shubhsaini/devopsclass-app:latest
+            sudo docker stop devopsclass-app || true
+            sudo docker rm devopsclass-app || true
+            sudo docker run -d --name devopsclass-app -p 3000:3000 shubhsaini/devopsclass-app:latest
