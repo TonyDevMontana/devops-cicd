@@ -38,5 +38,5 @@ jobs:
           script: |
             sudo docker pull shubhsaini/devopsclass-app:latest
             sudo docker stop devopsclass-app || true
-            sudo docker rm devopsclass-app || true
+            sudo docker rm -f devopsclass-app || true
             sudo docker run -d --name devopsclass-app -p 3000:3000 shubhsaini/devopsclass-app:latest
